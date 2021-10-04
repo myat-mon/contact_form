@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>お問い合わせフォーム</title>
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="styles/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row card">
+            <div class="col s12">
+                <h1>お問い合わせフォーム</h1>
+                <form class="col s12" method="post" id="contact_form" validate>
+                    <div class="row name_row">
+                        <div class="col s4">
+                            お名前<span class="required-text">必須</span>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="first_name" name="name" type="text" placeholder="First Name" required>
+                        </div>
+                        <div class="input-field col s4">
+                            <input id="last_name" name="name" type="text" placeholder="Last Name" required>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col s4">
+                            性別
+                        </div>
+                        <div class="input-field col s2">
+                            <p>
+                                <label>
+                                    <input class="with-gap" name="gender" type="radio" value="male" checked />
+                                    <span>男性</span>
+                                </label>
+                            </p>
+                        </div>
+                        <div class="input-field col s2">
+                            <p>
+                                <label>
+                                    <input class="with-gap" name="gender" type="radio" value="female" />
+                                    <span>女性</span>
+                                </label>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s4">
+                            ご住所
+                        </div>
+                        <div class="input-field col s8">
+                            <div class="postal-code">〒 <input id="zip1" name="post-code" type="number" placeholder="000"
+                                    class="postal-code-input"> - <input class="postal-code-input" id="zip2"
+                                    name="post-code" type="number" placeholder="0001"></div>
+                        </div>
+                        <div class="input-field col s8 push-s4">
+                            <input id="address" name="address" type="text">
+                        </div>
+                    </div>
+
+                    <div class="row phone_no_row'">
+                        <div class="col s4">
+                            電話番号<span class="required-text">必須</span>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="phone_number" name="phone_number" type="tel" placeholder="09123456789" required>
+                        </div>
+                    </div>
+
+                    <div class="row email_row">
+                        <div class="col s4">
+                            メール<span class="required-text">必須</span>
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="email" name="email" type="email" placeholder="contact@gmail.com" required>
+                        </div>
+                    </div>
+
+                    <div class="row confirm_mail_row">
+                        <div class="col s4">
+                            確認メール
+                        </div>
+                        <div class="input-field col s6">
+                            <input id="confirm_email" name="confirm_email" type="email" placeholder="contact@gmail.com">
+                        </div>
+                    </div>
+
+                    <div class="row contact_type_row">
+                        <div class="col s4">
+                            お問い合わせ種類
+                        </div>
+                        <div class="input-field col s6">
+                            <select name="お問い合わせの種類" id="contact_type" class="browser-default">
+                                <option value="" disabled="" selected="">選択してください</option>
+                                <option value="勉強会について" id="contact_type_study">勉強会について</option>
+                                <option value="レクチャー用の書類提出" id="contact_type_lecture">レクチャー用の書類提出</option>
+                                <option value="新しいクラスの情報" id="contact_new_class">新しいクラスの情報</option>
+                                <option value="個人プロジェクトの窓口" id="contact_type_project">個人プロジェクトの窓口</option>
+                                <option value="定例ミーティングの欠席に関する連絡" id="contact_type_meeting">定例ミーティングの欠席に関する連絡</option>
+                                <option value="それぞれのご意見" id="contact_type_advice">それぞれのご意見</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row " id="new_class_level">
+                        <div class="row">
+                            <div class="col s4">
+                                レベルと資格<span class="required-text">必須</span>
+                            </div>
+                            <div class="input-field col s8">
+                                <input id="level" name="level" type="text">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col s4">
+                            お問い合わせ内容
+                        </div>
+                        <div class="input-field col s8">
+                            <textarea rows="6" placeholder="こちらに問い合わせ内容を入力ください"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <p>
+                                <label>
+                                    <input class="filled-in" id="is_student" name="is_student" type="checkbox" />
+                                    <span>学生</span>
+                                </label>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12 ">
+                            <button class="btn waves-effect waves-light" id="submit" type="submit"
+                                name="submit">上記に同意してお問合せを送信する
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col s12 card" id="submitted_form_value">
+            <h5>送信されたデータ</h5>
+            <div class="card-content"></div>
+            <table class="submitted_form_data">
+                <tr>
+                    <td><span class="bold-text">お名前 :</span></td>
+                    <td class="popup_colortext">
+                        <span id="submitted_name"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="bold-text">性別 :</span></td>
+                    <td class="popup_colortext">
+                        <span id="submitted_gender"></span>
+                    </td>
+                </tr>
+                <tr>
+                    <td><span class="bold-text">ご住所 :</span></td>
+                    <td class="popup_colortext"><span id="submitted_address"></span></td>
+                </tr>
+                <tr>
+                    <td><span class="bold-text">お電話番号 :</span></td>
+                    <td class="popup_colortext"><span id="submitted_phone"></span></td>
+                </tr>
+                <tr>
+                    <td><span class="bold-text">メール :</span></td>
+                    <td class="popup_colortext"><span id="submitted_mail"></span></td>
+                </tr>
+                <tr>
+                    <td><span class="bold-text">確認メール :</span></td>
+                    <td class="popup_colortext"><span id="submitted_confirm_email"></span></td>
+                </tr>
+                <tr>
+                    <td><span class="bold-text">お問い合わせ種類 :</span></td>
+                    <td class="popup_colortext"><span id="about_submitted"></span></td>
+                </tr>
+                <tr>
+                    <td><span class="bold-text">お問い合わせ内容 :</span></td>
+                    <td class="popup_colortext"><span id="submitted_content"></span></td>
+                </tr>
+                <tr>
+                    <td><span class="bold-text">レベルと資格 :</span></td>
+                    <td class="popup_colortext"><span id="submitted_level"></span></td>
+                </tr>
+                <tr>
+                    <td><span class="bold-text">学生 :</span></td>
+                    <td class="popup_colortext"><span id="is_student"></span></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    </div>
+    <!-- jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <!-- main.js -->
+    <!-- <script src="./scripts/main.js"></script> -->
+    <script>
+
+
+
+        $(document).ready(function () {
+            $('#country').formSelect();
+
+            function emailCheck() {
+                if ($('input[name="email"]').length && $('input[name="email"]').val() !== $('input[name="confirm_email"]').val()) {
+                    alert('確認メールはメールと同じものを記入ください！');
+                }
+
+            }
+
+        });
+
+        // just using click for testing purpose, use submit() instead of click in actual form submit
+
+        $('#contact_form #submit').click(() => {
+            const formValue = getFormValue('#contact_form');
+            $('#submitted_form_value').show();
+            $('#submitted_form_value .card-content').html("<pre>" + JSON.stringify(formValue, undefined, 2) + "</pre>");
+            return false;  // testing purpose 
+        });
+
+        $('#contact_form #contact_new_class').change((event) => {
+            if (event.target.selected) {
+                $('#new_class_level').removeClass('hide');
+            } else {
+                $('#contact_form #new_class_level').addClass('hide');
+            }
+        });
+
+        $('#contact_type').on('change', function () { // 「お問い合わせ種類」項目が選択された時
+            $('#new_class_level').hide();
+            switch ($('#contact_type option:selected').attr('id')) {
+                case 'contact_type_study':
+                    $('#new_class_level').hide();
+                    break;
+                case 'contact_type_lecture':
+                    $('#new_class_level').hide();
+                    break;
+                case 'contact_new_class':
+                    $('#new_class_level').show();
+                    break;
+                case 'contact_type_project':
+                    $('#new_class_level').hide();
+                    break;
+                case 'contact_type_meeting':
+                    $('#new_class_level').hide();
+                    break;
+                case 'contact_type_advice':
+                    $('#new_class_level').hide();
+                    break;
+                default:
+                    $('#new_class_level').hide();
+                    break;
+            }
+        });
+
+
+
+        function submiytValue() { // 送信されたデータの値を変更する
+
+            $('#popup_design').text($('#design_name').val());
+            // setTemplateBtn();
+            // 注文する内容
+            if ($('#order_set').prop('checked')) {
+                $('#popup_equipment').text('生地+器具セット');
+            } else if ($('#order_kiji_only').prop('checked')) {
+                $('#popup_equipment').text('生地のみ');
+            }
+            // 生地
+            if ($('#pj_cloth').prop('checked')) {
+                $('#popup_cloth_name').text('テトロンポンジ');
+            } else if ($('#trp_cloth').prop('checked')) {
+                $('#popup_cloth_name').text('トロピカル');
+            }
+            // 防炎加工
+            if ($('#fireproof').prop('checked')) {
+                $('#popup_fireproof').text('あり');
+            } else {
+                $('#popup_fireproof').text('なし');
+            }
+            // 表と裏のデザイン
+            if ($('#identical_design').prop('checked')) {
+                $('#popup_direction').text('同一デザイン');
+            } else if ($('#other_design').prop('checked')) {
+                $('#popup_direction').text('異なるデザイン');
+            }
+            // 枚数
+            $('#popup_num').text($('#num').val());
+            $('#popup_total_num').text($('#num').val());
+            // チチの色を選ぶ
+            if ($('#color_white').prop('checked')) {
+                $('#popup_chichi_color').text('白色');
+            } else {
+                $('#popup_chichi_color').text('黒色');
+            }
+            $('#popup_design').text($('#design_name').val());
+            // setTemplateBtn();
+            setAtypePrice();
+        }
+
+
+        $('#contact_form #submit').click(() => {
+            if ($('#first_name, #last_name').val() === '') {
+                alert("名前を入力してください。");
+                $('html, body').animate({ scrollTop: $('.name_row').position().top }, 'slow');
+                return false;
+            }
+            if ($('#phone_number').val() === '' || !$('#phone_number').val().match(/^[0-9]+$/)) {
+                alert('電話番号の形式を確認してください。');
+                $('html, body').animate({ scrollTop: $('.phone_no_row').position().top }, 'slow');
+                return false;
+            }
+            if ($('#email').val() === '' || !$('#email').val().match(/^[\w\.\-]+\@[\w\.\-]+\.[a-zA-Z]{2,6}$/)) {
+                alert('メールアドレスの形式を確認してください。');
+                $('html, body').animate({ scrollTop: $('.email_row').position().top }, 'slow');
+                return false;
+            }
+            if ($('#email').val() === !$('#confirm_email').val()) {
+                alert('確認メールはメールアドレスと同じものを入れてください');
+                $('html, body').animate({ scrollTop: $('.confirm_mail_row').position().top }, 'slow');
+                return false;
+            }
+            else {
+                return true;
+            }
+        });
+
+        /**
+         * reactive form validation check
+         * 
+         * @param {object} formValue 
+         */
+        function validateForm(formValue) {
+            Object.keys(formValue).every((key) => {
+                if (formValue[key] == '') {
+                    M.toast({
+                        html: `${key} is required`,
+                        classes: 'error-toast',
+                        completeCallback: () => {
+                            errorElement.removeClass('invalid')
+                        }
+                    });
+                    let errorElement = $('#' + key);
+                    errorElement.addClass('invalid');
+                    $([document.documentElement, document.body]).animate({
+                        scrollTop: errorElement.offset().top - 100,
+                    }, 300);
+                    return false;
+                }
+                else {
+                    return true;
+                }
+            });
+        }
+
+        //////////////////////////////////////
+        ///////// Common functions //////////
+        ////////////////////////////////////
+        /**
+         * Get target form value
+         * 
+         * @param {string} formID
+         * @return {object} formValue
+         */
+        function getFormValue(formID) {
+            let formValue = {};
+            $(formID).find('input, select').not('[readonly="true"]').each(function (index, formField) {
+                if (formField.name && formField.name != '') {
+                    if (formField.type == 'radio' && !formField.checked) {
+                        return true;
+                    }
+                    if (formField.type == 'checkbox' && !formField.checked) {
+                        formValue[formField.name] = formField.checked;
+                    } else {
+                        formValue[formField.name] = formField.value;
+                    }
+                }
+            });
+            return formValue;
+        }
+
+    </script>
+</body>
+
+</html>
