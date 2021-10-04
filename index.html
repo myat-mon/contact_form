@@ -374,9 +374,6 @@
     <!-- main.js -->
     <!-- <script src="./scripts/main.js"></script> -->
     <script>
-
-
-
         $(document).ready(function () {
             $('#country').formSelect();
 
@@ -384,7 +381,6 @@
                 if ($('input[name="email"]').length && $('input[name="email"]').val() !== $('input[name="confirm_email"]').val()) {
                     alert('確認メールはメールと同じものを記入ください！');
                 }
-
             }
 
         });
@@ -432,51 +428,6 @@
                     break;
             }
         });
-
-
-
-        function submiytValue() { // 送信されたデータの値を変更する
-
-            $('#popup_design').text($('#design_name').val());
-            // setTemplateBtn();
-            // 注文する内容
-            if ($('#order_set').prop('checked')) {
-                $('#popup_equipment').text('生地+器具セット');
-            } else if ($('#order_kiji_only').prop('checked')) {
-                $('#popup_equipment').text('生地のみ');
-            }
-            // 生地
-            if ($('#pj_cloth').prop('checked')) {
-                $('#popup_cloth_name').text('テトロンポンジ');
-            } else if ($('#trp_cloth').prop('checked')) {
-                $('#popup_cloth_name').text('トロピカル');
-            }
-            // 防炎加工
-            if ($('#fireproof').prop('checked')) {
-                $('#popup_fireproof').text('あり');
-            } else {
-                $('#popup_fireproof').text('なし');
-            }
-            // 表と裏のデザイン
-            if ($('#identical_design').prop('checked')) {
-                $('#popup_direction').text('同一デザイン');
-            } else if ($('#other_design').prop('checked')) {
-                $('#popup_direction').text('異なるデザイン');
-            }
-            // 枚数
-            $('#popup_num').text($('#num').val());
-            $('#popup_total_num').text($('#num').val());
-            // チチの色を選ぶ
-            if ($('#color_white').prop('checked')) {
-                $('#popup_chichi_color').text('白色');
-            } else {
-                $('#popup_chichi_color').text('黒色');
-            }
-            $('#popup_design').text($('#design_name').val());
-            // setTemplateBtn();
-            setAtypePrice();
-        }
-
 
         $('#contact_form #submit').click(() => {
             if ($('#first_name, #last_name').val() === '') {
