@@ -95,7 +95,7 @@
 }
 #mail,
 #retype-mail,
-#level {
+#level-text {
   width: 100%;
   background-color: #fff;
   padding: 0.1rem 0.75rem;
@@ -166,8 +166,7 @@
 
 <body>
   <div class="container container-details">
-    <div class="contact-form">
-      <form>
+      <form action="#" id="contact_form" name="contact_form" method="post">
         <div id="contact-data-input">
           <h1 class="contact-form-title">お問い合わせフォーム</h1>
 
@@ -214,7 +213,7 @@
             </div>
             <div class="col s7 m7 18">
 
-              <span>テ</span>
+              <span>〒</span>
               <input type="number" name="address" id="address-1" placeholder="001">
 
               <span>ー</span>
@@ -287,7 +286,7 @@
               <span class="contact-form-need">必須</span>
             </div>
             <div class="col s12 m7 18">
-              <input type="text" name="level" id="level" required>
+              <input type="text" id="level-text">
             </div>
           </div>
 
@@ -308,7 +307,11 @@
 
           </div>
           <div>
-            <button type="submit" onclick="myFunction()" class="send-button">上記に同意してお問い合わせを送信する</button>
+            <!-- <button type="submit" onclick="myFunction()" class="send-button">上記に同意してお問い合わせを送信する</button> -->
+
+            <button type="submit" class="send-button contact-btn hide-on-small-only mt-5 mb-5" value="上記に同意してお問合せを送信する">上記に同意してお問合せを送信する</button>
+
+
           </div>
         </div>
       </form>
@@ -322,40 +325,20 @@
         <div class="contact-form-label">メール：<span id="output-mail"></span></div><br>
         <div class="contact-form-label">確認メール：<span id="output-retypemail"></span></div><br>
         <div class="contact-form-label">お問い合わせ種類：<span id="output-contact-type"></span></div><br>
-        <div class="contact-form-label">レベルと資格：<span id="output-level"></span></div><br>
+        <div id="output-level-wrap" style="display: none;">
+          <div class="contact-form-label">レベルと資格：<span id="output-level"></span></div><br>
+        </div>
         <div class="contact-form-label">お問い合わせ内容：<span id="output-contact-contact"></span></div><br>
         <div class="contact-form-label">学生：<span id="output-student"></span></div><br>
       </div>
 
-    </div>
+    
 
   </div>
   <script>
-
-    function ShowHideDiv() {
-      var Qualification = document.getElementById("level");
-      var selectedValue = document.getElementById("contact_type").value;
-      var Level = document.getElementById("level-box");
-      var Levelinput = document.getElementById("level").value;
-      if (selectedValue === "新しいクラスの情報") {
-        Level.style.display = "block";
-        Qualification.setAttribute("required", "");
-        if(Levelinput === "") {
-          console.log('レベルcheck');
-          alert("レベルと資格を入れてください。")
-          return false;
-        }
-         
-      } if (selectedValue !== "新しいクラスの情報") {
-        Level.style.display = "none";
-        Qualification.removeAttribute("required");
-        console.log('レベルnocheck');
-        return true;
-      }
-      document.getElementById("output-level").innerHTML = Qualification.value;
-    }
-
-    // Validate numbers
+    
+    window.addEventListener('load', function() {
+      //Phone Number Validation
     var phone = document.getElementById("phone");
     var phoneFormact = /^\d{11}$/g;
     phone.onkeyup = function () {
@@ -366,8 +349,7 @@
       }
     }
 
-
-
+    //Mail Validation 
     var mail = document.getElementById("mail");
     var mailFormact = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/g;
 
@@ -390,36 +372,63 @@
       }
     }
 
-    function myFunction() {
+    ShowHideDiv();
+     
+    });
 
-      var name1 = document.getElementById("name-1").value;
-      var name2 = document.getElementById("name-2").value;
+    
+    
+    //ShowHide Function
+    function ShowHideDiv() {
+      var selectedValue = document.getElementById("contact_type").value;
+      var Level_box = document.getElementById("level-box");
+      if (selectedValue == "新しいクラスの情報") {
+        Level_box.style.display = "block";
+      } else {
+        Level_box.style.display = "none";
+      }
+    }
 
-      if (name1, name2 === "") {
+
+    //Submit Function
+    var contactForm = document.getElementById("contact_form");
+    contactForm.addEventListener('submit', onsubmit);
+    function onsubmit(e) {
+      e.preventDefault();
+      var First_name = document.getElementById("name-1").value;
+      var Last_name = document.getElementById("name-2").value;
+      var Male = document.getElementById("gender-1");
+      var Female = document.getElementById("gender-2");
+      var address1 = document.getElementById("address-1").value;
+      var address2 = document.getElementById("address-2").value;
+      var addresstext = document.getElementById("address-text").value;
+      var phone = document.getElementById("phone").value;
+      var mail = document.getElementById("mail").value;
+      var retypemail = document.getElementById("retype-mail").value;
+      var checkedmail = document.getElementById("checked-mail");
+      var selectedValue = document.getElementById("contact_type").value;
+      var Level_text = document.getElementById("level-text").value;
+      var Contact_contetnt = document.getElementById("contact-content").value;
+      var Student = document.getElementById("student");
+      var Contact_data_input = document.getElementById("contact-data-input");
+      var Contact_data_output = document.getElementById("contact-data-output");
+
+      //Condation For Name
+      if (First_name, Last_name === "") {
         alert("お名前を入れてください。");
         return false;
       } else {
-        document.getElementById("output-name").innerHTML = name1 + " " + name2;
+        document.getElementById("output-name").innerHTML = First_name + " " + Last_name;
       }
 
-
-      //to get gendet
-      var gender1 = document.getElementById("gender-1");
-      var gender2 = document.getElementById("gender-2");
-      if (gender1.checked == true) {
+      //Condation For Gender And Output Gender
+      if (Male.checked == true) {
         document.getElementById("output-gender").innerHTML = "男性";
       } else {
         document.getElementById("output-gender").innerHTML = "女性";
       }
 
-      //to get address
-      var address1 = document.getElementById("address-1").value;
-      var address2 = document.getElementById("address-2").value;
-      var addresstext = document.getElementById("address-text").value;
-      document.getElementById("output-address").innerHTML = address1 + address2 + addresstext;
-
-      // to get Phone
-      var phone = document.getElementById("phone").value;
+      //Condation Fro Phone
       if (phone === "") {
         alert("電話番号を入れてください。");
         return false;
@@ -427,11 +436,7 @@
         document.getElementById("output-phone").innerHTML = phone;
       }
 
-      //to get mail 
-      var mail = document.getElementById("mail").value;
-      var retypemail = document.getElementById("retype-mail").value;
-      var checkedmail = document.getElementById("checked-mail");
-
+      //Condation For Mail
       if (mail === "") {
         alert("メールアドレスを入れてください。")
         return false;
@@ -440,58 +445,44 @@
         document.getElementById("output-retypemail").innerHTML = retypemail;
       }
 
-      //to get お問い合わせ
-      var selectedValue = document.getElementById("contact_type").value;
+      //Condation For Level
 
-      document.getElementById("output-contact-type").innerHTML = selectedValue;
-
-
-
-
-      //to get Level
-      var Qualification = document.getElementById("level");
-      var Level = document.getElementById("level-box");
-      var Levelinput = document.getElementById("level").value;
       
-      if (Level.style.display === "block" && Levelinput === "" ) {
-        alert("レベルと資格を入れてください。")
-        Qualification.setAttribute("required", ""); 
+     
+      if ((document.getElementById("level-text").value == "") && (document.getElementById("contact_type").value == "新しいクラスの情報")) {
+        // Level_text.setAttribute("required", "");
+        
+        console.log('Level_text');
+        alert("レベルと資格を入れてください。");
         return false;
-      }else {
-        Qualification.removeAttribute("required");
+      } else if (selectedValue != "新しいクラスの情報") {
+        console.log("test")
+        document.getElementById("output-level-wrap").style.display = "none";
+      } else {
+        document.getElementById("output-level-wrap").style.display = "block";
+        document.getElementById("output-level").innerHTML = Level_text;
       }
-      ShowHideDiv();
-
-      document.getElementById("output-level").innerHTML = Qualification.value;
 
 
-
-      //to get Content-contetnt
-      var Contact_contetnt = document.getElementById("contact-content").value;
-      document.getElementById("output-contact-contact").innerHTML = Contact_contetnt;
-
-      //to get student
-      var Student = document.getElementById("student");
+      //Condation For Student and Output Student
       if (Student.checked === true) {
         document.getElementById("output-student").innerHTML = "true";
       } else {
         document.getElementById("output-student").innerHTML = "false";
       }
 
-      var x, y;
-      x = document.getElementById("contact-data-input");
-      y = document.getElementById("contact-data-output");
+      //Output Fro All Data
 
+      document.getElementById("output-address").innerHTML = address1 + address2 + addresstext;
+      document.getElementById("output-contact-type").innerHTML = selectedValue;
+      document.getElementById("output-contact-contact").innerHTML = Contact_contetnt;
 
-      if (y.style.display === "none") {
-        y.style.display = "block";
-        x.style.display = "none"
+      //Condation Contact_data
+      if (Contact_data_output.style.display === "none") {
+        Contact_data_output.style.display = "block";
+        // Contact_data_input.style.display = "none"
       }
-
     }
-
-
-
 
   </script>
 </body>
